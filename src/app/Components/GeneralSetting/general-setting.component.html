@@ -1,0 +1,110 @@
+<section class="gradient-custom sec">
+  <div class="container py-5  ">
+    <div class="card shadow w-75 mx-auto" >
+      <div class="card-header bg-gradient-primary text-dark">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h1 class="card-title display-6 text-uppercase mb-2 p-4">{{show? 'special Settings':'General Settings'}}</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body w-75 mx-auto">
+        <!-- Show this button when not in 'show' mode (i.e., when adding custom settings) -->
+        <button *ngIf="!show" class=" btn btn-primary mb-2"
+          (click)="resetFormAndShowEmployees()">Add Custom Settings</button>
+
+        <!-- Show this button when in 'show' mode (i.e., when canceling or editing) -->
+        <button *ngIf="show" class="px-5 btn  btn-danger mb-2"
+          (click)="cancelAddCustomSettings()">Cancel</button>
+
+        <form [formGroup]="GeneralSetting" (submit)="OnSubmit($event)">
+          <input type="hidden" name="id" formControlName="id" />
+          <div class="row d-flex my-2">
+           
+
+          </div>
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-4 col-md-4" *ngIf="show">
+              <div class="form-outline">
+                <label class="form-label">Select Employee</label>
+                <select id="empid" class="form-control" name="empid" (change)="selectemployee()" formControlName="empid">
+                  <option [value]="null" disabled>Select Employee</option>
+                  <option *ngFor="let emp of setting.employeeList" [value]="emp.value">{{ emp.text }}</option>
+                </select>
+                
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="form-outline">
+                <label class="form-label" for="overtimeHour">Over Time Hour</label>
+                <input min="0" [value]="setting.overtimeHour" type="number" id="overtimeHour" name="overtimeHour"
+                  formControlName="overtimeHour" class="form-control " 
+                  placeholder="Enter Over Time Hour"
+                  />
+              </div>
+              <div *ngIf="ControlName.overtimeHour.touched">
+                <p *ngIf="ControlName.overtimeHour.hasError('min')" class="text-danger">Value can't be less than zero</p>
+                <p *ngIf="ControlName.overtimeHour.hasError('required')" class="text-danger">Over Time Hour is required</p>
+              </div>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="form-outline">
+                <label class="form-label" for="discountHour">discount Hour</label>
+                <input min="0" [value]="setting.discountHour" type="number" id="discountHour" name="discountHour"
+                  formControlName="discountHour" class="form-control form-control"
+                  placeholder="Enter discount Hour"
+                  />
+              </div>
+              <div *ngIf="ControlName.discountHour.touched">
+                <p *ngIf="ControlName.discountHour.hasError('min')" class="text-danger">Value can't be less than zero</p>
+                <p *ngIf="ControlName.discountHour.hasError('required')" class="text-danger">Discount Hour is required</p>
+              </div>
+            </div>
+          </div>
+          <h2 class="pb-2 pb-md-0 mb-md-3  display-1">Weekend Days</h2>
+          <div class="d-flex justify-content-center align-items-center">
+            <div class="d-flex-column">
+                <div class="custom-checkboxes my-3">
+                    <div *ngFor="let day of setting.weekends.slice(0, 4)" class="checkbox-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="custom-checkbox" required [checked]="day.isSelected" (change)="itemSelectionChanged(day,$event)" />
+                            <span>{{ day.displayValue }}</span>
+                        </label>
+                    </div>
+                </div>
+        
+                <!-- Second line with three checkboxes -->
+                <div class="custom-checkboxes">
+                    <div *ngFor="let day of setting.weekends.slice(4)" class="checkbox-item">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="custom-checkbox" required [checked]="day.isSelected" (change)="itemSelectionChanged(day,$event)" />
+                            <span>{{ day.displayValue }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="mb-2 mt-3 d-flex justify-content-center" *ngIf="serverErrors.length > 0">
+            <p class="text-danger" *ngFor="let error of serverErrors">{{ error }}</p>
+          </div>
+        </div>
+
+          <div class="mt-1 pt-2 d-flex justify-content-end  ms-auto">
+
+            <button *ngIf="flag2 && flag3" class="btn btn-md btn-primary " type="submit">Save
+            </button>
+          </div>
+
+        </form>
+        <div class="mt-1 pt-2 d-flex justify-content-end ms-auto">
+          <button *ngIf="flag" class="btn btn-md btn-danger me-2"
+            (click)="onDelete(this.generalSettingId)">Delete</button>
+          <button *ngIf="flag" class="btn btn-md btn-warning" (click)="onEdit(this.generalSettingId)">Edit</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

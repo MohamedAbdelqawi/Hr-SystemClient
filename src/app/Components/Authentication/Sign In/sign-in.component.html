@@ -1,0 +1,113 @@
+<section class="vh-100">
+    <div class="container py-5 h-100">
+      <div class="row d-flex align-items-center justify-content-center h-100">
+        <div class="col-md-8 col-lg-7 col-xl-6">
+          <img src="assets/Img/logn .jpeg" class="img-fluid" alt="Phone image" />
+        </div>
+        <div class="col-md-7 col-lg-5 col-xl-4 offset-xl-1">
+          <form [formGroup]="FormLogin" (submit)="OnSubmit($event)">
+            <!-- Login Form -->
+            <h3 class="mb-4 text-center" style="color: #007bff; font-size: 24px">
+              Sign in
+            </h3>
+        
+            <!-- Email input with envelope icon -->
+            <div class="form-outline mb-4">
+              <label for="form1Example13" class="form-label mb-2" style="color: black; font-size: 18px"
+                >Email address</label
+              >
+              <div class="input-group">
+                <input
+                  type="emailOrUserName"
+                  id="form1Example13"
+                  class="form-control form-control-lg"
+                  name="emailOrUserName"
+                  placeholder="Enter Email or User name"
+                  formControlName="emailOrUserName"
+                />
+                <span class="input-group-text"
+                  ><i class="bi bi-envelope"></i
+                ></span>
+              </div>
+              
+              <ng-container *ngIf="FormControls.emailOrUserName.touched || Submitted">
+                <span
+                  *ngIf="FormControls.emailOrUserName.hasError('required')"
+                  class="text-danger"
+                  >Email is required</span
+                >
+                <span
+                  *ngIf="FormControls.emailOrUserName.hasError('email')"
+                  class="text-danger"
+                  >Enter valid email
+                </span>
+              </ng-container>
+            </div>
+  
+            <!-- Password input with lock icon -->
+            <div class="form-outline mb-4">
+              <label
+                class="form-label"
+                for="password"
+                style="color: black; font-size: 18px"
+                >Password</label
+              >
+              <div class="input-group">
+                <input
+                  type="text"
+                  id="password"
+                  name="password"
+                  placeholder="Enter Password"
+                  formControlName="password"
+                  class="form-control form-control-lg"
+                /><span class="input-group-text"><i class="bi bi-lock"></i></span>
+              </div>
+              <ng-container *ngIf="FormControls.password.touched || Submitted">
+                <span
+                  *ngIf="FormControls.password.hasError('required')"
+                  class="text-danger"
+                  >Password is required</span
+                >
+              </ng-container>
+            </div>
+  
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <!-- Remember me Checkbox -->
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  value=""
+                  id="form1Example3"
+                  checked
+                />
+                <label
+                  class="form-check-label"
+                  for="form1Example3"
+                  style="color: #6610f2; font-size: 16px"
+                  >Remember me</label
+                >
+              </div>
+              <a href="#!" style="color: #ff6a00; font-size: 16px"
+                >Forgot password?</a
+              >
+            </div>
+            <div *ngIf="apiError" class="alert alert-danger text-center">{{ apiError }}</div>
+            <!-- Submit button -->
+            <button
+            
+              type="submit"
+              class="btn btn-success btn-lg btn-block px-3"
+              style="font-size: 18px"
+            
+            >
+           
+             
+          Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  

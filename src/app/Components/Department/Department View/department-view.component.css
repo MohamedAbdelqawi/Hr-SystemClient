@@ -1,0 +1,89 @@
+:host ::ng-deep .ui-toast {
+  z-index: 10000; /* or any other high value */
+  
+}
+
+#dt-department thead th {
+font-size: 15px;
+text-align: center;
+}
+
+.card {
+border: none !important;
+border-radius: 15px !important;
+overflow: hidden !important;
+}
+
+.card-header {
+background: linear-gradient(to right, #3498db, #2c3e50) !important;
+color: white !important;
+padding: 20px !important;
+border-bottom: none !important;
+}
+
+.card-title {
+font-size: 2.5rem !important;
+margin-bottom: 0 !important;
+}
+
+.lead {
+font-size: 1.2rem !important;
+}
+
+.d-flex {
+flex-direction: column !important;
+justify-content: center !important;
+align-items: center !important;
+}
+
+.d-none {
+display: none !important;
+}
+
+
+/* Adjustments for the DataTables */
+
+table {
+width: 100% !important;
+margin-top: 20px !important;
+border-collapse: collapse !important;
+background-color: #fff !important;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+th, td {
+padding: 10px !important;
+text-align: center !important;
+}
+
+th {
+  background-color: #89888871 !important; /* Header background color */
+    color: #1563b0 !important;
+}
+
+td {
+border-bottom: 1px solid #ecf0f1 !important;
+}
+
+/* Responsive styles for smaller screens */
+@media (min-width: 768px) {
+.d-flex {
+  flex-direction: row !important;
+}
+
+.img-fluid {
+  max-width: 80px !important;
+}
+}
+
+td .bi {
+  font-size: 20px !important;   
+  margin: 0 8px !important;
+  cursor: pointer !important;
+}
+
+
+.err{
+margin-left: 270px;
+margin-top: 0;
+}

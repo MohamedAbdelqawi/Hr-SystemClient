@@ -1,0 +1,86 @@
+.container {
+  width: 96%;
+ 
+  margin-right: auto;
+  margin-left: auto;
+}
+
+#dt-filter-select thead th {
+    font-size: 12px;
+    text-align: center;
+    
+  }
+  
+  .card {
+    border: none !important;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+  }
+  
+  .card-header {
+    background: linear-gradient(to right, #3498db, #2c3e50) !important;
+    color: white !important;
+    padding: 20px !important;
+    border-bottom: none !important;
+  }
+  
+  .card-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .lead {
+    font-size: 1.2rem !important;
+  }
+  
+  .d-flex {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .d-none {
+    display: none !important;
+  }
+  
+  
+  /* Adjustments for the DataTables */
+  
+  table {
+    width: 100% !important;
+    margin-top: 20px !important;
+    border-collapse: collapse !important;
+    background-color: #fff !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+   
+  }
+  
+  #dt-filter-select tbody tr td {
+    padding: 10px !important;
+    text-align: center !important;
+    font-size: 14px !important;
+    white-space: nowrap; /* This prevents text from wrapping to the next line */
+    overflow: hidden;   /* This hides the overflowed text */
+    text-overflow: ellipsis; /* This displays an ellipsis (...) when text overflows */
+    vertical-align: middle !important; /* Vertically center the text */
+  }
+  
+  thead th {
+    background-color: #89888871 !important;
+    color: #1563b0 !important;
+    text-align: center !important;
+    vertical-align: middle !important; /* Vertically center the text */
+  }
+  
+
+
+  
+  /* Responsive styles for smaller screens */
+  @media (min-width: 768px) {
+    .d-flex {
+      flex-direction: row !important;
+      /* Change back to row for larger screens */
+    }
+   
+  }
+  

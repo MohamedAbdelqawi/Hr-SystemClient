@@ -1,0 +1,71 @@
+<section class="gradient-custom sec">
+  <div class="container py-5 h-100">
+    <div class="card shadow w-75 mx-auto">
+      <div class="card-header bg-gradient-primary text-dark ">
+        <div class="d-flex justify-content-center align-items-center">
+          <div>
+            <h1 class="card-title display-6 text-uppercase mb-2 p-4 ">
+              Public Holiday
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="card-body p-4 p-md-5">
+        <form [formGroup]="PublicHolidyFrom" (submit)="OnSubmit($event)">
+          <div class="row d-flex mb-4">
+            <div class="col-md-4">
+              <div class="form-outline">
+                <label class="form-label" for="name">Name</label>
+                <input type="text" id="name" class="form-control" name="name" formControlName="name" />
+              </div>
+            </div>
+             
+            <div class="col-md-4">
+              <label class="form-label" for="date">Date</label>
+              <input class="form-control" id="date" type="date" name="date" formControlName="date" [min]="minDate()" />
+            </div>
+
+           
+            <div class="col-2 d-flex align-items-end ">
+              <button class="btn btn-primary btn-md me-2" type="submit">
+                {{ publicHolidayId > 0 ? "Edit" : "Add" }}
+              </button>
+              <button *ngIf="publicHolidayId > 0" class="btn btn-danger btn-md me-2" type="button" (click)="OnReset('cancel')">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </form>
+        <div class="row">
+          <div *ngIf="(serverErrors.length > 0)">
+            <p class="text-danger" *ngFor="let error of serverErrors">{{ error }}</p>
+          </div>
+        </div>
+        <div class="row">
+          <table datatable [dtOptions]="dtoption" class="table pt-3 table-light px-2" [dtTrigger]="dtTrigger" id="dt-publicholdiy"
+            width="100%" class="table table-light table-striped table-hover text-center table-bordered">
+            <thead class="thead-light  text-center">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let p of publicHolidays; let i = index">
+                <td>{{ i+1 }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.date | date:'mediumDate' }}</td>
+                <td>
+                  <i class="mx-1 bi bi-pencil-square text-warning" (click)="OnEdit(p.id)"></i>
+                  <i class="bi text-danger bi-trash3-fill" (click)="OnDelete(p.id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

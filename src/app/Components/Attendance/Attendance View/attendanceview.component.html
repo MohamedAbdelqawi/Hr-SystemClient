@@ -1,0 +1,231 @@
+<div class="container my-5  ">
+  <div class="card shadow ">
+    <div class="card-header bg-gradient-primary text-dark">
+      <div class="d-flex justify-content-center align-items-center">
+        <div>
+          <h1 class="card-title display-6 text-uppercase mb-2 p-4">
+            Employee Attendance Report
+          </h1>
+        </div>
+       
+      </div>
+    </div>
+
+    <div class="card-body mb-4 px-4 px-md-5 ">
+      <div class="d-flex flex-row align-items-center my-3">
+        <button
+          type="button"
+          class="btn btn-primary px-3 "
+          (click)="Toggle()"
+          [ngClass]="{'disabled': Show}"
+        >
+          <i class="bi bi-plus"></i> Add Attendance
+        </button>
+        <div class="col-md-6 mx-2 ms-auto">
+          <form
+            (ngSubmit)="Submit()"
+            [formGroup]="FormFilter"
+            class="d-flex align-items-center"
+          >
+            <label for="from" class="mx-2 mb-0"> From </label>
+            <input
+              class="form-control form-control-sm me-2"
+              type="date"
+              formControlName="from"
+            />
+            <label for="to" class="mx-2 mb-0"> To </label>
+            <input
+              class="form-control form-control-sm me-2"
+              type="date"
+              formControlName="to"
+            />
+            <button type="submit" class="btn btn-primary btn-sm me-2 mx-2 px-3">
+              Show
+            </button>
+          </form>
+        </div>
+
+        <div class="col-md-2 ms-auto">
+          <div class="d-flex justify-content-end align-items-center">
+            <i class="bi bi-file-earmark-pdf h3 mx-2 text-danger"></i>
+            <i class="bi bi-printer h3 text-primary"></i>
+          </div>
+        </div>
+      </div>
+
+      <div >
+        <form [formGroup]="EmployeeAttendanceForm" *ngIf="Show" (submit)="OnSubmit($event)">
+          <input
+            type="text"
+            id="id"
+            class="form-control form-control-lg"
+            name="id"
+            formControlName="id"
+            hidden
+          />
+
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-3 mb-2">
+              <label
+                for="selectedEmployee"
+                class="form-label select-label me-3 d-block "
+                >Employee Name</label
+              >
+              <select
+                formControlName="selectedEmployee"
+                id="selectedEmployee"
+                class="form-control  w-100"
+                name="selectedEmployee"
+                [ngClass]="{'disabled-select': flag}"
+              >
+              <option [value]="0" disabled>Select Employee</option>
+                <option [value]="emp.id" *ngFor="let emp of employeeList">
+                  {{ emp.name }}
+                </option>
+              </select>
+              <div *ngIf="(controls.selectedEmployee.touched || submitted)&&Show">
+                <p
+                  *ngIf="controls.selectedEmployee.hasError('required')"
+                  class="text-danger"
+                >
+                  Employee Name is required
+                </p>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+              <label class="form-label" for="date">Date</label>
+              <input
+                class="form-control form-control-md"
+                id="date"
+                type="date"
+                name="date"
+                formControlName="date"
+                [min]="minDate()"
+                [max]="minDate()"
+                [ngClass]="{'disabled-select': flag2}"
+              />
+              <div *ngIf="(controls.date.touched || submitted)&&Show">
+                <p
+                  *ngIf="controls.date.hasError('required')"
+                  class="text-danger"
+                >
+                  Date is required
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-3 mb-2 d-flex align-items-center">
+              <div class="form-outline datepicker w-100">
+                <label class="form-label" for="arrivalTime">Arrival Time</label>
+                <input
+                  type="time"
+                  id="arrivalTime"
+                  class="form-control form-control-md"
+                  name="arrivalTime"
+                  formControlName="arrivalTime"
+                />
+                <div *ngIf="(controls.arrivalTime.touched || submitted)&&Show">
+                  <p
+                    *ngIf="controls.arrivalTime.hasError('required')"
+                    class="text-danger"
+                  >
+                    Arrival Time is required
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-3 mb-2">
+              <div class="form-outline">
+                <label class="form-label" for="leaveTime">Leave Time</label>
+                <input
+                  type="time"
+                  id="leaveTime"
+                  class="form-control form-control-md"
+                  name="leaveTime"
+                  formControlName="leaveTime"
+                />
+                <div *ngIf="(controls.leaveTime.touched || submitted)&&Show">
+                  <p
+                    *ngIf="controls.leaveTime.hasError('required')"
+                    class="text-danger"
+                  >
+                    Leave Time is required
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="mb-2 mt-3 d-flex justify-content-center" *ngIf="(serverErrors.length > 0)&&Show">
+              <p class="text-danger" *ngFor="let error of serverErrors">{{ error }}</p>
+            </div>
+          </div>
+          <div class="mt-2 pt-2 d-flex justify-content-center">
+            <button class="btn btn-md btn-primary px-4" type="submit">
+              {{ employeeAttendanceId > 0 ? "Edit " : "Add " }}
+            </button>
+            <a
+              class="btn btn-danger btn-md ms-4 px-3"
+              (click)="OnReset('cancel')"
+            >
+              Cancel
+            </a>
+          </div>
+        </form>
+      </div>
+
+      <div class="table-responsive">
+        <!-- table -->
+
+        <table
+          id="dt-filter-select"
+          [dtTrigger]="dtTrigger"
+          datatable
+          [dtOptions]="dtoption"
+          class="table pt-3 table-light table-striped table-hover text-center table-bordered "
+          cellspacing="0"
+          width="100%"
+        >
+          <thead class="thead-light text-uppercase text-center ">
+            <tr>
+              <th>#</th>
+              <th>Department</th>
+              <th>Employee Name</th>
+              <th>Arrival Time</th>
+              <th>Leave Time</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let attend of attendanceReport; let i = index"
+              class="table-row-hover"
+            >
+              <td>{{ i + 1 }}</td>
+              <td>{{ attend.employeeName }}</td>
+              <td>{{ attend.departmentName }}</td>
+              <td>{{ attend.arrivalTime }}</td>
+              <td>{{ attend.leaveTime }}</td>
+              <td>{{ attend.date | date : "mediumDate" }}</td>
+              <td class="table-action-icons">
+                <i
+                  class="bi bi-pencil-square text-warning mx-2"
+                  (click)="Edit(attend.id)"
+                ></i>
+                <i
+                  class="bi bi-trash3 text-danger"
+                  (click)="deleteAttendance(attend.id)"
+                ></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+#dt-filter-select1 thead th {
+    font-size: 14px; /* Adjust the font size as needed */
+    text-align: center;
+    
+  }
+  
+  .container {
+    width: 95%;
+    padding-right: 1%;
+    padding-left: 1%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+ /* styles.scss or your.component.scss */
+
+.card {
+    border: none !important;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+  }
+  
+  .card-header {
+    background: linear-gradient(to right, #3498db, #2c3e50) !important; /* Adjust colors as needed */
+    color: white !important;
+    padding: 20px !important;
+    border-bottom: none !important;
+  }
+  
+  .card-title {
+    font-size: 2.5rem !important;
+    margin-bottom: 0 !important;
+  }
+  
+  .lead {
+    font-size: 1.2rem !important;
+  }
+  
+  .d-flex {
+    flex-direction: column !important; /* Change to row for larger screens */
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  
+  .d-none {
+    display: none !important;
+  }
+  
+   
+  
+  table {
+    margin-top: 20px !important;
+    border-collapse: collapse !important;
+    background-color: #fff !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  
+ 
+  tbody tr td {
+    padding: 10px !important;
+    text-align: center !important;
+    white-space: nowrap; /* This prevents text from wrapping to the next line */
+    overflow: hidden;   /* This hides the overflowed text */
+    text-overflow: ellipsis; /* This displays an ellipsis (...) when text overflows */
+    vertical-align: middle !important; /* Vertically center the text */
+  }
+  
+  thead th {
+     
+      background-color: #89888871 !important; /* Header background color */
+      color: #1563b0 !important;
+      text-align: center !important;
+      vertical-align: middle !important; /* Vertically center the text */
+  }
+  
+  
+  tbody tr td { 
+    border-bottom: 1px solid #ecf0f1 !important; /* Border color between rows */
+  }
+  
+  /* Responsive styles for smaller screens */
+  @media (min-width: 768px) {
+    .d-flex {
+      flex-direction: row !important; /* Change back to row for larger screens */
+    }
+   
+  }
+
+ 
+ 
+  td .bi {
+    font-size: 20px !important;   
+    margin: 0 8px !important;
+    cursor: pointer !important;
+  }

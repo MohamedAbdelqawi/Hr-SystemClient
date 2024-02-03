@@ -1,0 +1,157 @@
+<section class="gradient-custom sec">
+  <div class="container py-4 h-100">
+    <div class="card shadow w-75 mx-auto">
+      <div class="card-header">
+        <div class="d-flex justify-content-center align-items-center">
+          <div>
+            <h1 class="card-title display-6 text-uppercase mb-2 p-4">
+              User Management
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="card-body px-4 p-md-5">
+        <form [formGroup]="AddUser" (submit)="OnSubmit($event)" class=" mb-4">
+          <div class="row">
+            <div class="col-md-3 mb-2">
+              <div class="form-outline">
+                <label class="form-label select-label me-3">Employee</label>
+                <select [ngClass]="{'disabled-select': flag}" class="select form-control w-100" formControlName="empId">
+                  <option value="" disabled>Choose Employee</option>
+                  <option [value]="e.value" *ngFor="let e of employee.employees">
+                    {{ e.text }}
+                  </option>
+                </select>
+              </div>
+              <div *ngIf="controls.empId.touched || submitted">
+                <p *ngIf="controls.empId.hasError('required')" class="text-danger">
+                  Employee is required
+                </p>
+              </div>
+            </div>
+   
+            
+            <div class="col-md-3 mb-2">
+              <div class="row d-flex">
+
+                <label class="form-label select-label me-3">Roles</label>
+                <div class="btn-group w-100 border">
+                  <button type="button" class="btn btn-white dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select Roles
+                  </button>
+                  <ul class="dropdown-menu w-100">
+                    <div class="ms-3" *ngFor="let item of employee.roles">
+                      <label>
+                        <input type="checkbox" class="form-check-input me-2"
+                          [checked]="selectedItems.includes(item.value)" (change)="itemSelectionChanged(item.value)" />
+                        {{ item.text }}
+                      </label>
+                    </div>
+                  </ul>
+                </div>
+
+                <div *ngIf="controls.selectRolesIds.touched || submitted">
+                  <p *ngIf="controls.selectRolesIds.hasError('required')" class="text-danger">
+                    Roles is required
+                  </p>
+                </div>
+              </div>
+             
+            </div>
+          
+            
+
+            <div class="col-md-3 mb-2">
+              <div class="form-outline">
+                <label class="form-label" for="userName">User Name</label>
+                <input type="text" id="userName" class="form-control" name="userName" formControlName="userName" />
+              </div>
+              <div *ngIf="controls.userName.touched || submitted">
+                <p *ngIf="controls.userName.hasError('required')" class="text-danger">
+                  User Name is required
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3 mb-2">
+              <div class="form-outline">
+                <label class="form-label d-block" for="email">Email</label>
+                <input type="email" id="email" class="form-control" name="email" formControlName="email" />
+              </div>
+              <div *ngIf="controls.email.touched || submitted">
+                <p *ngIf="controls.email.hasError('required')" class="text-danger">
+                  Email is required
+                </p>
+                <p *ngIf="controls.email.hasError('email')" class="text-danger">
+                  Enter Valid Email
+                </p>
+              </div>
+            </div>
+            <div class="col-md-3 mb-2">
+              <div class="form-outline datepicker w-100">
+                <label class="form-label d-block" for="password">Password</label>
+                <input type="text" id="password" class="form-control" name="password" formControlName="password" />
+              </div>
+              <div *ngIf="controls.password.touched || submitted">
+                <p *ngIf="controls.password.hasError('required')" class="text-danger">
+                  Password is required
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="mb-2 mt-3 d-flex justify-content-center" *ngIf="(serverErrors.length > 0)">
+              <p class="text-danger" *ngFor="let error of serverErrors">{{ error }}</p>
+            </div>
+            <div class="d-flex align-items-end justify-content-end">
+              <button class="btn btn-primary mx-1" type="submit">{{flag ? "Edit" : "Add"}}</button>
+              <a *ngIf="flag" class="btn btn-danger mx-1" (click)="OnReset()">Cancel</a>
+            </div>
+          </div>
+         
+        </form>
+
+        <div class="row">
+          <table datatable 
+          [dtOptions]="dtoption"
+          [dtTrigger]="dtTrigger"
+          class="pt-3  px-2 table table-light table-striped table-hover text-center table-bordered"  id="dt-users"
+            width="100%"  >
+            <thead class="thead-light text-uppercase text-center">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">User Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.fullName}}</td>
+                <td>{{item.userName}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.password}}</td>
+                <td>
+                  <ng-container *ngFor="let role of item.roles; let last = last">
+                    {{ role }}
+                    <span *ngIf="!last">, </span>
+                  </ng-container>
+                </td>
+                <td>
+                  <i class="mx-1 bi bi-pencil-square text-warning" (click)="OnEdit(item.id)"></i>
+                  <i class="bi text-danger bi-trash3-fill" (click)="OnDelete(item.id)"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+<section class="vh-100 gradient-custom sec">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div
+            class="card shadow-2-strong card-registration"
+            style="border-radius: 15px"
+          >
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">
+                Add New Department
+              </h3>
+              <form [formGroup]="formadd" (submit)="OnSubmit($event)">
+                <div class="row justify-content-center">
+                  <input  name="id"  formControlName="id" hidden>
+                  <div class="col-md-6 mb-2">
+                    
+                    <div class="form-outline">
+                      
+                      <label class="form-label" for="name">Department Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        class="form-control form-control-lg"
+                        name="name"
+                        formControlName="name"
+                      />
+                    </div>
+                    <div *ngIf="controlsname.name.touched || submitted">
+                      <p
+                        *ngIf="controlsname.name.hasError('required')"
+                        class="text-danger"
+                      >
+                        Department name is required.
+                      </p>
+                      <p
+                        *ngIf="
+                          controlsname.name.hasError('maxlength' && 'minlength')
+                        "
+                        class="text-danger"
+                      >
+                        Department name must be between 2 and 30 characters.
+                      </p>
+                      <div *ngIf="ModelState">
+                        <div *ngFor="let error of ModelState | keyvalue">
+                          <p class="text-danger my-2" >{{error.value}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="serverErrors">
+                  <div *ngFor="let error of serverErrors">
+                    <p   class="text-danger my-2">{{ serverErrors }}</p>
+                  </div>
+                </div>
+  
+                <div class="mt-4 pt-2 d-flex justify-content-center">
+                  <button class="btn btn-lg btn-primary" type="submit">
+                    {{ deptid > 0 ?  "Edit": "Add" }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

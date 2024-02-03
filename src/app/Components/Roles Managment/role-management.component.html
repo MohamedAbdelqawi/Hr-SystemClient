@@ -1,0 +1,97 @@
+<section class="gradient-custom ">
+  <div class="container py-5 h-100">
+    <div class="card shadow  w-75 mx-auto">
+      <div class="card-header bg-gradient-primary text-dark ">
+        <div class="d-flex justify-content-center align-items-center">
+          <div>
+            <h1 class="card-title display-6 text-uppercase mb-2 p-4 ">
+              Roles and Permissions
+            </h1>
+          </div>
+        </div>
+      </div>
+      <div class="card-body  p-4 p-md-5">
+        <form [formGroup]="FormRole" (submit)="OnSubmit($event)">
+          <div class="row mb-2 d-flex justify-content-center">
+            <div class="row d-flex  justify-content-center col-md-12 col-lg-6">
+             
+              <div class="input-group">
+              
+                <input type="text" name="roleName" formControlName="roleName" required
+                 
+
+                  class="form-control form-control-md rounded" placeholder="Ener Role Name">
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary ms-3">{{this.roleId != '' ? "Edit" : "Add"}}</button>
+                </div>
+                <div>
+                  <a class="btn btn-danger ms-2 " *ngIf="flag" (click)="OnCancel()">Cancel</a>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="mb-2 mt-3 d-flex justify-content-center">
+                <div *ngIf="ControlName.roleName.touched">
+                  <p *ngIf="ControlName.roleName.hasError('required')" class="text-danger">Role is required</p>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="d-flex justify-content-center" *ngIf="(serverErrors.length > 0)">
+                <p class="text-danger" *ngFor="let error of serverErrors">{{ error }}</p>
+              </div>
+            </div>
+            <div>
+
+              <div class=" d-flex justify-content-center">
+                <table class="table table-light table-striped table-hover text-center table-bordered" id="dt-Role">
+                  <thead class=" thead-light text-center  ">
+
+                    <tr>
+                      <th>#</th>
+                      <th >Role</th>
+                      <th >Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let role of roles ;let i=index">
+                      <td>{{i+1}}</td>
+                      <td class="text-center">{{role.name}}</td>
+                      <td class="text-center">
+                        <i class="bi bi-pencil-square text-warning mx-2" (click)="OnEdit(role.id)"></i>
+                        <i class="bi bi-trash3 text-danger mx-2" (click)="OnDelete(role.id)"></i>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="col-12 mt-2">
+
+                <table class="table table-light table-striped table-hover text-center table-bordered" id="dt-filter-select">
+                  <thead class=" thead-light text-center  ">
+                    <tr>
+                      <th scope="col">Module</th>
+                      <th scope="col">Addition</th>
+                      <th scope="col">View</th>
+                      <th scope="col">Edit</th>
+                      <th scope="col">Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

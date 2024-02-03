@@ -1,0 +1,100 @@
+
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+  }
+  .card-registration .select-arrow {
+    top: 13px;
+  }
+ 
+  
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+}
+.card-registration .select-arrow {
+  top: 13px;
+}
+ 
+.hide-row {
+  display: none;
+}
+/* Add these styles to your existing CSS file */
+
+#dt-Role thead th  {
+font-size: 15px;
+text-align: center;
+}
+ 
+.card {
+border: none !important;
+border-radius: 15px !important;
+overflow: hidden !important;
+}
+
+.card-header {
+background: linear-gradient(to right, #3498db, #2c3e50) !important;
+color: white !important;
+padding: 20px !important;
+border-bottom: none !important;
+}
+
+.card-title {
+font-size: 2.5rem !important;
+margin-bottom: 0 !important;
+}
+
+.lead {
+font-size: 1.2rem !important;
+}
+
+.d-flex {
+flex-direction: column !important;
+/* justify-content: center !important; */
+}
+
+.d-none {
+display: none !important;
+}
+
+ 
+table {
+width: 100% !important;
+margin-top: 20px !important;
+border-collapse: collapse !important;
+background-color: #fff !important;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+th, td {
+  padding: 10px !important;
+  text-align: center !important;
+  white-space: nowrap; /* This prevents text from wrapping to the next line */
+  overflow: hidden;   /* This hides the overflowed text */
+  text-overflow: ellipsis; /* This displays an ellipsis (...) when text overflows */
+  vertical-align: middle !important; /* Vertically center the text */
+}
+
+th {
+  background-color: #89888871 !important; /* Header background color */
+  color: #1563b0 !important;
+  text-align: center !important;
+  vertical-align: middle !important; /* Vertically center the text */
+}
+
+
+tr .bi {
+  font-size: 20px !important;   
+  margin: 0 8px !important;
+  cursor: pointer !important;
+}
+/* Responsive styles for smaller screens */
+@media (min-width: 768px) {
+.d-flex {
+  flex-direction: row !important;
+}
+}

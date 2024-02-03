@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.btn-primary{
+background-color: #317fb5  !important; 
+}
+:host ::ng-deep .ui-toast {
+    z-index: 10000; /* or any other high value */
+  }
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";

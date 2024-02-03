@@ -1,0 +1,94 @@
+<div class="container my-5">
+
+  <div class="card shadow w-75 mx-auto">
+    <div class="card-header bg-gradient-primary text-dark">
+      <div class="d-flex justify-content-center align-items-center">
+        <div>
+          <h1 class="card-title display-6 text-uppercase mb-2 p-4">
+            Departments
+          </h1>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="card-body mb-4 px-4 px-md-5">
+      <div class="d-flex flex-row align-items-center my-3">
+        <button type="button" class="btn btn-primary px-2" (click)="Toggle()" [ngClass]="{'disabled': Show}">
+          <i class="bi bi-plus"></i> Add Department
+        </button>
+        <div class="col-md-6 mx-4 ms-auto">
+          <form (ngSubmit)="OnSubmit($event)" *ngIf="Show" [formGroup]="formadd" class="d-flex align-items-center">
+            <label for="name" class="mx-2 mb-0"> Name </label>
+            <input class="form-control form-control-md" type="text" formControlName="name" name="name" />
+
+
+            <button type="submit" class="btn btn-primary   me-2 mx-2 px-3">
+              {{ deptid > 0 ? "Edit" : "Add" }}
+            </button>
+            <a class="btn btn-danger  me-2  px-2" (click)="OnReset('cancel')">
+              Cancel
+            </a>
+          </form>
+
+        </div>
+
+        <div class="col-md-2 ms-auto">
+          <div class="d-flex justify-content-end align-items-center">
+            <i class="bi bi-file-earmark-pdf h3 mx-2 text-danger"></i>
+            <i class="bi bi-printer h3 text-primary"></i>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="(controlsname.name.touched || submitted)
+              && serverErrors.length == 0
+              && Show " class="err">
+        <p *ngIf="controlsname.name.hasError('required')" class="text-danger">
+          Department name is required.
+        </p>
+        <p *ngIf="
+            controlsname.name.hasError('maxlength' && 'minlength')
+          " class="text-danger">
+          Department name must be between 2 and 30 characters.
+        </p>
+
+      </div>
+
+      <div class="row ">
+        <div *ngIf="serverErrors.length > 0">
+          <p class="text-danger text-center " *ngFor="let error of serverErrors">{{ error }}</p>
+        </div>
+      </div>
+
+      <div class="table-responsive ">
+        <!-- Table for Departments -->
+        <table id="dt-department" [dtOptions]="dtoption" datatable
+          class="table pt-3 table-light table-striped table-hover text-center table-bordered " [dtTrigger]="dtTrigger">
+          <thead class=" text-uppercase">
+            <tr>
+              <th class="th-sm">#</th>
+              <th class="th-sm">Name</th>
+              <th class="th-sm">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let department of departments; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ department.name }}</td>
+              <td>
+                <i class=" bi bi-pencil-square text-warning mx-2" (click)="Edit(department.id)"></i>
+                <i class="bi bi-trash3 text-danger mx-2 " (click)="deletedept(department.id)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>

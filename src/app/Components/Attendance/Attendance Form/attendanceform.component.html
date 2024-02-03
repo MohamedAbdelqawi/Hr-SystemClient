@@ -1,0 +1,191 @@
+<section class="vh-100 gradient-custom sec">
+  <div class="container py-5 h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Add Attendance</h3>
+         
+            <form [formGroup]="EmployeeAttendanceForm" (submit)="OnSubmit()">
+              <input type="text" id="id" class="form-control form-control-lg" name="id" formControlName="id" hidden />
+             
+              <div class="row">
+                <div class="col-md-6 mb-2">
+                  <label for="selectedEmployee" class="form-label select-label me-3 d-block">Employee Name</label>
+                  <select formControlName="selectedEmployee" id="selectedEmployee" class="select form-control-lg w-100" name="selectedEmployee">
+                    <option value="" disabled selected>Select Employee</option>
+                    <option [value]="emp.id" *ngFor="let emp of employeeList">{{ emp.name }}</option>
+                  </select>
+                  <div *ngIf="controls.selectedEmployee.touched || submitted">
+                    <p *ngIf="controls.selectedEmployee.hasError('required')" class="text-danger">Employee Name is required</p>
+                  </div>
+                </div>
+                
+                <div class="col-md-6 mb-2">
+                  <label class="form-label" for="date">Date</label>
+                  <input class="form-control form-control-lg" id="date" type="date" name="date" formControlName="date"  [min]="minDate()" [max]="minDate()"  />
+                  <div *ngIf="controls.date.touched || submitted">
+                    <p *ngIf="controls.date.hasError('required')" class="text-danger">Date is required</p>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="row">
+                <div class="col-md-6 mb-2 d-flex align-items-center">
+                  <div class="form-outline datepicker w-100">
+                    <label class="form-label" for="arrivalTime">Arrival Time</label>
+                    <input type="time" id="arrivalTime" class="form-control form-control-lg" name="arrivalTime" formControlName="arrivalTime" />
+                    <div *ngIf="controls.arrivalTime.touched || submitted">
+                      <p *ngIf="controls.arrivalTime.hasError('required')" class="text-danger">Arrival Time is required</p>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="col-md-6 mb-2">
+                  <div class="form-outline">
+                    <label class="form-label" for="leaveTime">Leave Time</label>
+                    <input type="time" id="leaveTime" class="form-control form-control-lg" name="leaveTime" formControlName="leaveTime" />
+                    <div *ngIf="controls.leaveTime.touched || submitted">
+                      <p *ngIf="controls.leaveTime.hasError('required')" class="text-danger">Leave Time is required</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4 mb-2 mt-3" *ngIf="serverErrors.length > 0">
+                  <p class="btn btn-danger" *ngFor="let error of serverErrors">{{ error }}</p>
+                </div>
+              </div>
+              <div class="mt-2 pt-2 d-flex justify-content-end">
+                <button class="btn btn-lg btn-primary" type="submit">{{ employeeAttendanceId >= 0 ? "Edit" : "Add" }}</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- <section class="vh-100 gradient-custom sec">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div
+            class="card shadow-2-strong card-registration"
+            style="border-radius: 15px"
+          >
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">Add Attendance</h3>
+              <form [formGroup]="EmployeeAttendanceForm" (submit)="OnSubmit()">
+                <input type="text" id="id" class="form-control form-control-lg" name="id" formControlName="id" hidden />
+                <div class="row">
+                  <div class="col-md-6 mb-2">
+                    <label
+                      for="selectedEmployee"
+                      class="form-label select-label me-3 d-block"
+                      >Employee Name</label
+                    >
+                    
+                    <select formControlName="selectedEmployee" id="selectedEmployee" class="select form-control-lg w-100" name="selectedEmployee">
+                      <option value="" disabled selected>Select Employee</option>
+                      <option [value]="emp.id" *ngFor="let emp of employeeList">{{ emp.name }}</option>
+                    </select>
+
+                    <div *ngIf="controls.selectedEmployee.touched || submitted">
+                      <p
+                        *ngIf="controls.selectedEmployee.hasError('required')"
+                        class="text-danger"
+                      >
+                        Employee Name is required
+                      </p>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-6 mb-2">
+                    <label class="form-label" for="date"> Date</label>
+                    <input
+                      class="form-control form-control-lg"
+                      id="date"
+                      type="date"
+                      name="date"
+                      formControlName="date"
+                    />
+                    <div *ngIf="controls.date.touched || submitted">
+                      <p
+                        *ngIf="controls.date.hasError('required')"
+                        class="text-danger"
+                      >
+                      Date is required
+                      </p>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-2 d-flex align-items-center">
+                    <div class="form-outline datepicker w-100">
+                      <label class="form-label" for="arrivalTime"
+                        >Arrival Time</label
+                      >
+                      <input
+                        type="time"
+                        id="arrivalTime"
+                        class="form-control form-control-lg"
+                        name="arrivalTime"
+                        formControlName="arrivalTime"
+                      />
+                      <div *ngIf="controls.arrivalTime.touched || submitted">
+                        <p
+                          *ngIf="controls.arrivalTime.hasError('required')"
+                          class="text-danger"
+                        >
+                          ArrivalTime is required
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="col-md-6 mb-2">
+                    <div class="form-outline">
+                      <label class="form-label" for="leaveTime"
+                        >Leave Time</label
+                      >
+                      <input
+                        type="time"
+                        id="leaveTime"
+                        class="form-control form-control-lg"
+                        name="leaveTime"
+                        formControlName="leaveTime"
+                      />
+                      <div *ngIf="controls.leaveTime.touched || submitted">
+                        <p
+                          *ngIf="controls.leaveTime.hasError('required')"
+                          class="text-danger"
+                        >
+                        Leave Time is required
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="mt-2 pt-2 d-flex justify-content-end">
+                  <button class="btn btn-lg btn-primary" type="submit">
+                    {{ employeeAttendanceId >= 0 ?  "Edit":"Add"  }}
+                  </button>
+                </div>
+              </form>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+   -->

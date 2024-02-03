@@ -1,0 +1,175 @@
+<link
+  href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+  rel="stylesheet"
+/>
+<!-- SIDEBAR -->
+ 
+<section id="sidebar" [ngClass]="{ hide: flag } ">
+  <a href="#" class="brand">
+    <i class="fa-solid fa-users mx-3"></i>
+    <span class="text">Hr System</span>
+  </a>
+  <ul class="side-menu top">
+    <li
+      [routerLink]="['Employee']"
+      [routerLinkActive]="'active'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a>
+        <i class="bx bx-group"></i>
+        <span class="text"> Employees</span>
+      </a>
+    </li>
+
+    <li
+      [routerLink]="['Depatment']"
+      [routerLinkActive]="'active'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a>
+        <i class="bx bxs-building"></i>
+        <span class="text">Departments</span>
+      </a>
+    </li>
+
+    <li
+      [routerLink]="['Attendance']"
+      [routerLinkActive]="'active'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a>
+        <i class="bx bx-check-square"></i>
+        <span class="text">Attendance</span>
+      </a>
+    </li>
+    <li
+      [routerLink]="['Salary']"
+      [routerLinkActive]="'active'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a>
+        <i class="bx bx-dollar"></i>
+        <span class="text">Salary</span>
+      </a>
+    </li>
+    <li
+      [routerLink]="['GeneralSettings']"
+      [routerLinkActive]="'active'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a>
+        <i class="bx bxs-cog"></i>
+        <span class="text">General Settings</span>
+      </a>
+    </li>
+    <li
+      [routerLink]="['PublicHolidays']"
+      [routerLinkActive]="'active'"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      <a>
+        <i class="bx bxs-cog"></i>
+        <span class="text">Public Holidays</span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="ms-4 mt-2 qq">
+    <li id="dropdown">
+      <a data-bs-toggle="collapse" href="#dropdown-lvl1" class="acc">
+        <i class="bx bx-wallet me-2"></i
+        ><span class="text"> Account Settings</span
+        ><i class="bx bx-chevron-down ms-2 ll"></i>
+        <span class="caret"></span>
+      </a>
+
+      <div id="dropdown-lvl1" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul class="nav navbar-nav side-menu top mt-0">
+            <!-- <li
+              [routerLink]="['users']"
+              [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a><i class="bx bx-group"></i>Users</a>
+            </li> -->
+            <li
+              [routerLink]="['UsersManagement']"
+              [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a><i class="bx bxs-user-plus"></i>Users Management</a>
+            </li>
+            <li
+              [routerLink]="['RolesManagement']"
+              [routerLinkActive]="'active'"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a><i class="bx bx-group"></i>Roles Management</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <ul class="side-menu">
+    <li>
+      <a class="logout" (click)="Logout()">
+        <i class="bx bxs-log-out-circle acc"></i>
+        <span class="text acc">Logout</span>
+      </a>
+    </li>
+  </ul>
+</section>
+<!-- SIDEBAR -->
+
+<!-- CONTENT -->
+<section  id="content">
+  <!-- NAVBAR -->
+  <nav [ngClass]="{ 'ma':!flag  }">
+    <i class="bx bx-menu fs-4" (click)="ToggleSidebar()"></i>
+
+    <form action="#" >
+      <div class="form-input">
+        <input type="search" placeholder="Search..." />
+        <button type="submit" class="search-btn">
+          <i class="bx bx-search"></i>
+        </button>
+      </div>
+    </form>
+
+    <div class="fs-6  w-100 d-flex justify-content-center text-primary ">
+      {{currentDateTime}}
+    </div>
+
+    <div>
+      <div class="btn-group ">
+        <p class="me-1 d-flex align-items-center my-auto fs-6 col">
+          {{ this.name }}
+        </p>
+        <img src="assets/Img/profile_3135715.png" alt="" class="img ms-2"  id="defaultDropdown"
+        data-bs-toggle="dropdown"
+        data-bs-auto-close="true"
+        aria-expanded="false">
+        
+        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+          <li><a class="dropdown-item p-2" (click)="Logout()">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- NAVBAR -->
+
+  <router-outlet></router-outlet>
+
+  <div class="welcome d-flex justify-content-center align-items-center" *ngIf="flag2">
+    <img src="assets/Img/Welcome.jpg" />
+  </div>
+ 
+  <!-- MAIN -->
+  <ng-container class="card flex justify-content-center gap-2">
+    <p-toast  [style]="{ marginTop: '30px' }"></p-toast>
+  </ng-container>
+</section>
+<!-- CONTENT -->

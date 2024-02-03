@@ -1,0 +1,70 @@
+<div class="container  my-5 ">
+  <div class="card shadow">
+    <div class="card-header bg-gradient-primary text-dark">
+      <div class="d-flex justify-content-center align-items-center">
+        <div>
+          <h1 class="card-title display-6 text-uppercase mb-2 p-4">Employee Management</h1>
+        </div>
+       
+      </div>
+    </div>
+    
+    <div class="card-body mb-4">
+
+       
+      <button type="button" class="btn btn-primary  px-2 my-3" [routerLink]="['/Dashboard/Employee/Add']">
+        <i class="bi bi-plus"></i> Add Employee
+      </button>
+
+      <div class="table-responsive">
+        <table
+          id="dt-filter-select1"
+          [dtTrigger]="dtTrigger"
+          datatable
+          [dtOptions]="dtoption"
+          class="table table-bordered table-striped table-hover text-center table-row-hover"
+          cellspacing="0"
+          width="100%"
+        >
+          <thead class="thead-light   text-center ">
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Salary</th>
+              <th>National Id</th>
+              <th>Arrival</th>
+              <th>Leave</th>
+              <th>Hire Date</th>
+              <th>Birth date</th>
+              <th>Gender</th>
+              <th>Country</th>
+             
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of employees ; let i = index" class="table-row-hover">
+              <td>{{ i + 1 }}</td>
+              <td>{{ e.firstName }} {{ e.lastName }}</td>
+              <td>{{ e.deptName }}</td>
+              <td>{{ e.salary | currency:'USD':'symbol':'1.2-2' }}</td>
+              <td>{{ e.nationalId }}</td>
+              <td>{{ e.arrivalTime }}</td>
+              <td>{{ e.leaveTime }}</td>
+              <td>{{ e.hireDate | date:'mediumDate' }}</td>
+              <td>{{ e.birthDate | date:'mediumDate' }}</td>
+              <td>{{ e.gender }}</td>
+              <td>{{ e.country }}</td>
+              
+              <td class="table-action-icons">
+                <i class="bi bi-pencil-square text-warning mx-2" [routerLink]="['/Dashboard/Employee/Edit',e.id]"></i>
+                <i class="bi bi-trash3 text-danger" (click)="deletemp(e.id)"></i>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
